@@ -1,0 +1,7 @@
+<response>
+<header>
+<responseTime>2020-07-17T14:40:37.543+09:00</responseTime>
+<resultCode>10</resultCode>
+<resultMsg>INVALID REQUEST PARAMETER ERROR.</resultMsg>
+</header>
+</response>
