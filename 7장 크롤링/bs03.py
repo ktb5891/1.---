@@ -8,3 +8,4 @@ bs = bs4.BeautifulSoup(html.content, 'html.parser')
 #print(bs.find('div', {'class':'today'}))
 today = bs.find('div', {'class':'today'})
 print(today.find('span').text)
+
