@@ -1,6 +1,7 @@
 import json
 import re
 from tkinter import filedialog
+import time
 # from hanspell import spell_checker
 
 def Load():
@@ -11,8 +12,10 @@ def Load():
 select_file = Load()
 with open(select_file,'r',encoding='utf-8') as f:
     json_data = json.load(f)
+w = open('전사파일.txt','w')
+
 length = len(json_data["utterance"])
-for i in range(length):
+for i in range(0,length):
     text = json_data["utterance"][i]["form"]
     parse = re.sub('[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]', '',text)
     if parse in '데요' or '죠' or '니다' or '든요' or '세요' or '예요' or '에요' or '되요' or '돼요' or '고요' or '거야' or '어요' or '게요' or '까요' or '아요':
@@ -60,6 +63,12 @@ for i in range(length):
         parse = parse.replace('X','(X)/(엑스)')
         parse = parse.replace('Y','(Y)/(와이)')
         parse = parse.replace('Z','(Z)/(지)')
-
-    print(parse)
+    
+    parse = parse+'\n'
+    w.write(parse)
+w.close()
+time.sleep(10)
+end = 'tmax'
+while end != 'y':
+    end = input('If you finished work press "y" : ')
 
