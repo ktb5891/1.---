@@ -10,12 +10,39 @@ def Load():
                                           ("all files", "*.*")))
     return filename
 select_file = Load()
+
+def Gant(parse):
+#aa = '자 여러분 오늘 공부할 내용은 저기 그 아 자에대해서 공부해보자'
+#print(aa)
+    Gantlang = ['이','그','저','어','에','응','아','음','으','자']
+    gant_parse = list(parse)
+    count = 0
+    for i in range(len(gant_parse)):
+        if parse[i] in Gantlang:
+            if len(parse) == 1:
+                gant_parse.insert(i+1,'/')
+            elif i == 0 and gant_parse[i+1] ==  ' ':
+                #print('first',i,'번째 : ',String[i])
+                gant_parse.insert(i+1,'/')
+                count += 1
+            elif i != len(gant_parse)-1 and gant_parse[i-1] == ' ' and gant_parse[i+1] == ' ':
+                #print('mid',i,'번째 : ',String[i])
+                gant_parse.insert(i+1+count,'/')
+                count += 1
+            elif gant_parse[i-1]== ' ' and i == len(gant_parse)-1:
+                #print('fin',i,'번째 : ',aa[i])
+                gant_parse.insert(i+1+count,'/')
+                count += 1
+    parse = ''.join(gant_parse)
+    #print(String)
+    return parse
+    
 with open(select_file,'r',encoding='utf-8') as f:
     json_data = json.load(f)
 w = open('전사파일.txt','w')
 
 length = len(json_data["utterance"])
-Gantlang = ['이','그','저','어','저기','에','응','아','음','으']
+
 for i in range(0,length):
     text = json_data["utterance"][i]["form"]
     parse = re.sub('[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]', '',text)
@@ -66,20 +93,23 @@ for i in range(0,length):
         parse = parse.replace('Y','(Y)/(와이)')
         parse = parse.replace('Z','(Z)/(지)')
     
-    if parse in Gantlang: 
-        if parse[parse.find(Gantlang)-1] == ' ' and parse[parse.find(Gantlang)+1] == ' ':
-            parse = parse.replace('이','이/')
-            parse = parse.replace('그','그/')
-            parse = parse.replace('저','저/')
-            parse = parse.replace('어','어/')
-            parse = parse.replace('저기','저기/')
-            parse = parse.replace('에','에/')
-            parse = parse.replace('응','응/')
-            parse = parse.replace('아','아/')
-            parse = parse.replace('음','음/')
-            parse = parse.replace('으','으/')
-            
+    
+#     if Gantlang in list(parse): 
+#         if  :
+#             parse = parse.replace('이','이/')
+#             parse = parse.replace('그','그/')
+#             parse = parse.replace('저','저/')
+#             parse = parse.replace('어','어/')
+#             parse = parse.replace('저기','저기/')
+#             parse = parse.replace('에','에/')
+#             parse = parse.replace('응','응/')
+#             parse = parse.replace('아','아/')
+#             parse = parse.replace('음','음/')
+#             parse = parse.replace('으','으/')
+#             parse = parse.replace('자','자/')
+    parse = Gant(parse)
     parse = parse+'\n'
+    print(parse)
     w.write(parse)
 w.close()
 time.sleep(5)
