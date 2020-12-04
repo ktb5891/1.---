@@ -14,7 +14,7 @@ select_file = Load()
 def Gant(parse):
 #aa = '자 여러분 오늘 공부할 내용은 저기 그 아 자에대해서 공부해보자'
 #print(aa)
-    Gantlang = ['이','그','저','어','에','응','아','음','으','자']
+    Gantlang = ['그','저','어','에','응','아','음','으','자']
     gant_parse = list(parse)
     count = 0
     for i in range(len(gant_parse)):
@@ -41,27 +41,33 @@ with open(select_file,'r',encoding='utf-8') as f:
     json_data = json.load(f)
 w = open('전사파일.txt','w')
 
-length = len(json_data["utterance"])
 
-for i in range(0,length):
-    text = json_data["utterance"][i]["form"]
-    parse = re.sub('[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]', '',text)
-    if parse in '데요' or '죠' or '니다' or '든요' or '세요' or '예요' or '에요' or '되요' or '돼요' or '고요' or '거야' or '어요' or '게요' or '까요' or '아요':
-        parse = parse.replace('데요','데요.')
-        parse = parse.replace('죠','죠.')
-        parse = parse.replace('니다','니다.')
-        parse = parse.replace('든요','든요.')
-        parse = parse.replace('세요','세요.')
-        parse = parse.replace('예요','예요.')
-        parse = parse.replace('에요','에요.')
-        parse = parse.replace('되요','되요.')
-        parse = parse.replace('돼요','돼요.')
-        parse = parse.replace('고요','고요.')
-        parse = parse.replace('거야','거야.')
-        parse = parse.replace('어요','어요.')
-        parse = parse.replace('게요','게요.')
-        parse = parse.replace('까요','까요?')
-        parse = parse.replace('아요','아요.')
+
+def Endword_check(json_data):
+    length = len(json_data["utterance"])
+    for i in range(0,length):
+        text = json_data["utterance"][i]["form"]
+        parse = re.sub('[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]', '',text)
+        endword = ['데요','죠','니다','든요','세요','예요','에요','되요','돼요','고요','거야','어요','게요','까요','아요']
+        for j in endword:
+            if parse in j:
+                parse = parse.replace(j,j+'.')
+        if parse in :
+            parse = parse.replace('데요','데요.')
+            parse = parse.replace('죠','죠.')
+            parse = parse.replace('니다','니다.')
+            parse = parse.replace('든요','든요.')
+            parse = parse.replace('세요','세요.')
+            parse = parse.replace('예요','예요.')
+            parse = parse.replace('에요','에요.')
+            parse = parse.replace('되요','되요.')
+            parse = parse.replace('돼요','돼요.')
+            parse = parse.replace('고요','고요.')
+            parse = parse.replace('거야','거야.')
+            parse = parse.replace('어요','어요.')
+            parse = parse.replace('게요','게요.')
+            parse = parse.replace('까요','까요?')
+            parse = parse.replace('아요','아요.')
 
     #p = re.compile('[A-Z]')
     #if p.match(parse) != None:
