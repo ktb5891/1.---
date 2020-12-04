@@ -15,6 +15,7 @@ with open(select_file,'r',encoding='utf-8') as f:
 w = open('전사파일.txt','w')
 
 length = len(json_data["utterance"])
+Gantlang = ['이','그','저','어','저기','에','응','아','음','으']
 for i in range(0,length):
     text = json_data["utterance"][i]["form"]
     parse = re.sub('[-=+,#/\?:^$.@*\"※~&%ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]', '',text)
@@ -64,19 +65,20 @@ for i in range(0,length):
         parse = parse.replace('X','(X)/(엑스)')
         parse = parse.replace('Y','(Y)/(와이)')
         parse = parse.replace('Z','(Z)/(지)')
-
-    if parse in ' 이 ' or ' 그 ' or ' 저 ' or ' 어 ' or ' 저기 ' or ' 에 ' or ' 응 ' or ' 아 ' or ' 음 ' or ' 으 ': 
-        parse = parse.replace('이','이/')
-        parse = parse.replace('그','그/')
-        parse = parse.replace('저','저/')
-        parse = parse.replace('어','어/')
-        parse = parse.replace('저기','저기/')
-        parse = parse.replace('에','에/')
-        parse = parse.replace('응','응/')
-        parse = parse.replace('아','아/')
-        parse = parse.replace('음','음/')
-        parse = parse.replace('으','으/')
-        
+    
+    if parse in Gantlang: 
+        if parse[parse.find(Gantlang)-1] == ' ' and parse[parse.find(Gantlang)+1] == ' '
+            parse = parse.replace('이','이/')
+            parse = parse.replace('그','그/')
+            parse = parse.replace('저','저/')
+            parse = parse.replace('어','어/')
+            parse = parse.replace('저기','저기/')
+            parse = parse.replace('에','에/')
+            parse = parse.replace('응','응/')
+            parse = parse.replace('아','아/')
+            parse = parse.replace('음','음/')
+            parse = parse.replace('으','으/')
+            
     parse = parse+'\n'
     w.write(parse)
 w.close()
