@@ -35,8 +35,9 @@ for i in range(0,length):
         parse = parse.replace('까요','까요?')
         parse = parse.replace('아요','아요.')
 
-    p = re.compile('[A-Z]+')
-    if p.match(parse) != None:
+    #p = re.compile('[A-Z]')
+    #if p.match(parse) != None:
+    if parse in 'A' or 'B' or 'C' or 'D' or 'E' or 'F' or 'G' or 'H' or 'I' or 'J' or 'K' or 'L' or 'M' or 'N' or 'O' or 'P' or 'Q' or 'R' or 'S' or 'T' or 'U' or 'V' or 'W' or 'X' or 'Y' or 'Z':
         parse = parse.replace('A','(A)/(에이)')
         parse = parse.replace('B','(B)/(비)')
         parse = parse.replace('C','(C)/(씨)')
@@ -67,7 +68,7 @@ for i in range(0,length):
     parse = parse+'\n'
     w.write(parse)
 w.close()
-time.sleep(10)
+time.sleep(5)
 end = 'tmax'
 while end != 'y':
     end = input('If you finished work press "y" : ')
