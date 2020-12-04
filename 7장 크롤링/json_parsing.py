@@ -67,7 +67,7 @@ for i in range(0,length):
         parse = parse.replace('Z','(Z)/(지)')
     
     if parse in Gantlang: 
-        if parse[parse.find(Gantlang)-1] == ' ' and parse[parse.find(Gantlang)+1] == ' '
+        if parse[parse.find(Gantlang)-1] == ' ' and parse[parse.find(Gantlang)+1] == ' ':
             parse = parse.replace('이','이/')
             parse = parse.replace('그','그/')
             parse = parse.replace('저','저/')
