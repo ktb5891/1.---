@@ -64,7 +64,19 @@ for i in range(0,length):
         parse = parse.replace('X','(X)/(엑스)')
         parse = parse.replace('Y','(Y)/(와이)')
         parse = parse.replace('Z','(Z)/(지)')
-    
+    아/, 그/, 어/, 그/, 아/, 음/, 저/, 저기/, 에/, 으/, 응/
+    if parse in ' 이 ' or ' 그 ' or ' 저 ' or ' 어 ' or ' 저기 ' or ' 에 ' or ' 응 ' or ' 아 ' or ' 음 ' or ' 으 ': 
+        parse = parse.replace('이','이/')
+        parse = parse.replace('그','그/')
+        parse = parse.replace('저','저/')
+        parse = parse.replace('어','어/')
+        parse = parse.replace('저기','저기/')
+        parse = parse.replace('에','에/')
+        parse = parse.replace('응','응/')
+        parse = parse.replace('아','아/')
+        parse = parse.replace('음','음/')
+        parse = parse.replace('으','으/')
+        
     parse = parse+'\n'
     w.write(parse)
 w.close()
